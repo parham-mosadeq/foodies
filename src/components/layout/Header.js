@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { MenuBook, CloseSharp, MenuOpen } from '@mui/icons-material';
+import { CloseSharp, MenuOpen } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 
 const MainHeader = styled.header`
   width: 50vw;
   height: 100vh;
+  overflow-x: hidden;
   background-color: #4d89ff;
   margin: 0;
   padding: 0;
@@ -32,7 +33,7 @@ const MainHeader = styled.header`
 
     ul {
       padding: 0.4rem 1rem;
-
+      text-transform: capitalize;
       li {
         list-style: none;
         a {
@@ -65,6 +66,7 @@ const MainHeader = styled.header`
         margin-right: 1.5rem;
         border-bottom: none;
         display: block;
+        flex-grow: 1;
       }
       ul {
         li {
@@ -76,22 +78,34 @@ const MainHeader = styled.header`
   }
 `;
 
-const MenuBtn = styled.button`
+const MobileMenu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
-  margin: 0;
-  padding: 0;
+  width: 100vw;
+  height: max-content;
+  margin: 0 auto;
+  padding: 25px;
   border: none;
-  background-color: transparent;
-  color: #1c2d4d;
+  background-color: blue;
+  color: #fff;
   font-size: 20px;
-  z-index: 10;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
+  position: relative;
+
+  button {
+    display: block;
+    margin: 0;
+    margin-right: 2rem;
+    padding: 0;
+    border: none;
+    z-index: 1000;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    color: #fff;
+    transform: translate(50%, -50%);
+  }
 
   @media (min-width: 700px) {
     display: none;
@@ -107,16 +121,16 @@ const Header = () => {
 
   return (
     <>
-      <MenuBtn onClick={handelMenu}>
+      <MobileMenu onClick={handelMenu}>
         <Box component='div'>
           <Typography>
-            <Link style={{ textDecoration: 'none', color: '#1853c5' }}>
+            <Link style={{ textDecoration: 'none', color: '#fff' }}>
               Foodies
             </Link>
           </Typography>
         </Box>
-        <>{mobileOpen ? <CloseSharp /> : <MenuOpen />}</>
-      </MenuBtn>
+        <button>{mobileOpen ? <CloseSharp /> : <MenuOpen />}</button>
+      </MobileMenu>
       <MainHeader mobileOpen={mobileOpen}>
         <nav>
           <ul>
