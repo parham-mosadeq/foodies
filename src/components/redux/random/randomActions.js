@@ -24,7 +24,8 @@ const getRandomRecipe = () => {
   return (dispatch) => {
     try {
       dispatch(fetchRandomReq());
-      axios('www.themealdb.com/api/json/v1/1/random.php')
+      axios
+        .get('https://www.themealdb.com/api/json/v1/1/random.php')
         .then((resp) => {
           const randomData = resp.data;
           dispatch(fetchRandomSuccess(randomData));

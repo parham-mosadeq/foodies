@@ -2,8 +2,13 @@ const initState = {
   randomRecipe: '',
 };
 
-const randomReducer = (state, action) => {
+const randomReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'SUCCESS':
+      return {
+        randomRecipe: action.payload,
+      };
+
     default:
       return initState;
   }
