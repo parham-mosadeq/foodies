@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Container } from '@mui/material';
-import { display } from '@mui/system';
 const Random = () => {
   const [reload, setReload] = useState(false);
   const dispatch = useDispatch();
