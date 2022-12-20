@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CloseSharp, MenuOpen } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
 const MainHeader = styled.header`
   width: 50vw;
