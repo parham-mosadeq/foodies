@@ -11,15 +11,27 @@ import {
   Typography,
 } from '@mui/material';
 import { Container } from '@mui/material';
+
+import { Favorite } from '@mui/icons-material';
+import { Icon } from '@mui/material';
+import { addToFave } from '../redux/random/randomActions';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Random = () => {
+  // * Using reload to get new meal
   const [reload, setReload] = useState(false);
+  const [isFave, setIsFave] = useState(false);
+
   const dispatch = useDispatch();
-  const randomMeals = useSelector(
-    (state) => state.randomState.randomRecipe.meals
-  );
+  // * Reading data
+  const randomMeals = useSelector((state) => state.randomState.randomRecipe);
+  const { meals } = randomMeals ?? '';
 
   useEffect(() => {
     dispatch(getRandomRecipe());
+    setIsFave(false);
   }, [reload]);
 
   return (
@@ -36,48 +48,69 @@ const Random = () => {
       </Typography>
       <Divider variant='middle' />
       <Grid container mt={4}>
-        {randomMeals
-          ? randomMeals.map((rm) => {
-              const {
-                idMeal,
-                strMeal,
-                strCategory,
-                strIngredient1,
-                strIngredient2,
-                strIngredient3,
-                strIngredient4,
-                strIngredient5,
-                strIngredient6,
-                strIngredient7,
-                strIngredient8,
-                strIngredient9,
-                strIngredient10,
-                strIngredient11,
-                strIngredient12,
-                strSource,
-                strTags,
-                strMealThumb,
-                strInstructions,
-              } = rm;
+        {meals ? (
+          meals.map((rm) => {
+            const {
+              idMeal,
+              strMeal,
+              strCategory,
+              strIngredient1,
+              strIngredient2,
+              strIngredient3,
+              strIngredient4,
+              strIngredient5,
+              strIngredient6,
+              strIngredient7,
+              strIngredient8,
+              strIngredient9,
+              strIngredient10,
+              strIngredient11,
+              strIngredient12,
+              strIngredient13,
+              strIngredient14,
+              strIngredient15,
+              strIngredient16,
+              strIngredient17,
+              strIngredient18,
+              strIngredient19,
+              strIngredient20,
+              strSource,
+              strTags,
+              strMealThumb,
+              strInstructions,
+            } = rm;
 
-              const ingredients = [
-                strIngredient1,
-                strIngredient2,
-                strIngredient3,
-                strIngredient4,
-                strIngredient5,
-                strIngredient6,
-                strIngredient7,
-                strIngredient8,
-                strIngredient9,
-                strIngredient10,
-                strIngredient11,
-                strIngredient12,
-              ];
+            const ingredients = [
+              strIngredient1,
+              strIngredient2,
+              strIngredient3,
+              strIngredient4,
+              strIngredient5,
+              strIngredient6,
+              strIngredient7,
+              strIngredient8,
+              strIngredient9,
+              strIngredient10,
+              strIngredient11,
+              strIngredient12,
+              strIngredient13,
+              strIngredient14,
+              strIngredient15,
+              strIngredient16,
+              strIngredient17,
+              strIngredient18,
+              strIngredient19,
+              strIngredient20,
+            ];
 
-              return (
-                <React.Fragment key={idMeal}>
-                  <Grid item xs={12}>
+            return (
+              <React.Fragment key={idMeal}>
+                <Grid item xs={12}>
+                  <Box
+                    display='flex'
+                    justifyContent='space-between'
+                    alignItems='center'
+                  >
                     <Box component='div'>
                       <Typography
                         component='p'
@@ -102,76 +135,91 @@ const Random = () => {
                         #{strTags}
                       </Typography>
                     </Box>
-                    <Typography
-                      component='h2'
-                      mt={4}
-                      variant='h2'
-                      color='primary'
+                    <Icon
+                      color={isFave ? 'primary' : 'disabled'}
+                      sx={{ cursor: 'pointer' }}
                     >
-                      How to cook it?
-                    </Typography>
-                    <Box component='div'>
-                      <img width={400} src={strMealThumb} alt={strMeal} />
-                    </Box>
-                    <Typography
-                      component='p'
-                      p={2}
-                      variant='h5'
-                      color='text.primary'
-                    >
-                      First get all the ingredients that are required!
-                    </Typography>
-                    <Divider variant='center' />
-                    <Box component='div'>
-                      {ingredients.map((ing, idx) => {
-                        return (
-                          <React.Fragment key={idx}>
-                            <List component='li'>
-                              {ing !== '' ? (
-                                <>
-                                  <Typography component='p' variant='p'>
-                                    {idx + 1}.{ing}{' '}
-                                  </Typography>
-                                </>
-                              ) : null}
-                            </List>
-                          </React.Fragment>
-                        );
-                      })}
-                    </Box>
+                      <Favorite
+                        onClick={() => {
+                          dispatch(addToFave(idMeal, isFave));
+                          setIsFave(!isFave);
+                        }}
+                      />
+                    </Icon>
+                  </Box>
+                  <Typography
+                    component='h2'
+                    mt={4}
+                    variant='h2'
+                    color='primary'
+                  >
+                    How to cook it?
+                  </Typography>
+                  <Box component='div'>
+                    <img width={400} src={strMealThumb} alt={strMeal} />
+                  </Box>
+                  <Typography
+                    component='p'
+                    p={2}
+                    variant='h5'
+                    color='text.primary'
+                  >
+                    First get all the ingredients that are required!
+                  </Typography>
+                  <Divider variant='center' />
+                  <Box component='div'>
+                    {ingredients.map((ing, idx) => {
+                      return (
+                        <React.Fragment key={idx}>
+                          <List component='li'>
+                            {ing !== '' ? (
+                              <>
+                                <Typography component='p' variant='p'>
+                                  {idx + 1}.{ing}{' '}
+                                </Typography>
+                              </>
+                            ) : null}
+                          </List>
+                        </React.Fragment>
+                      );
+                    })}
+                  </Box>
 
-                    <Typography
-                      component='p'
-                      variant='p'
-                      color='text.secondary'
-                      m={3}
-                    >
-                      {strInstructions}
-                    </Typography>
-                    <Link
-                      component='a'
-                      variant='p'
-                      href={strSource}
-                      target='_blank'
-                      sx={{
-                        width: 5,
-                        textDecoration: 'none',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      source to this article
-                    </Link>
-                  </Grid>
-                </React.Fragment>
-              );
-            })
-          : null}
+                  <Typography
+                    component='p'
+                    variant='p'
+                    color='text.secondary'
+                    m={3}
+                  >
+                    {strInstructions}
+                  </Typography>
+                  <Link
+                    component='a'
+                    variant='p'
+                    href={strSource}
+                    target='_blank'
+                    sx={{
+                      width: 5,
+                      textDecoration: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    source to this article
+                  </Link>
+                </Grid>
+              </React.Fragment>
+            );
+          })
+        ) : (
+          <h1>loading...</h1>
+        )}
       </Grid>
       <Box mt={5} mb={4} component='div'>
         <Button variant='outlined' onClick={() => setReload((prev) => !prev)}>
           Reload
         </Button>
       </Box>
+      <ToastContainer />
     </Container>
   );
 };

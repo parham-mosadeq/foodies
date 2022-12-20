@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const fetchRandomReq = () => {
   return {
-    type: 'Req',
+    type: 'REQ',
   };
 };
 
@@ -17,6 +18,28 @@ const fetchRandomFailed = (err) => {
   return {
     type: 'ERROR',
     payload: err,
+  };
+};
+
+const addToFave = (id, isFave) => {
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 600,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+  };
+
+  if (!isFave) {
+    toast('added', toastConfig);
+  } else {
+    toast.warn('removed', toastConfig);
+  }
+  return {
+    type: 'RANDOM_FAVE',
+    payload: id,
   };
 };
 
@@ -39,4 +62,4 @@ const getRandomRecipe = () => {
   };
 };
 
-export { getRandomRecipe };
+export { getRandomRecipe, addToFave };
