@@ -43,12 +43,14 @@ const addToFave = (id, isFave) => {
   };
 };
 
+const BASE_URL = 'https://www.themealdb.com/api/json/v1/1';
+
 const getRandomRecipe = () => {
   return (dispatch) => {
     try {
       dispatch(fetchRandomReq());
       axios
-        .get('https://www.themealdb.com/api/json/v1/1/random.php')
+        .get(`${BASE_URL}/random.php`)
         .then((resp) => {
           const randomData = resp.data;
           dispatch(fetchRandomSuccess(randomData));

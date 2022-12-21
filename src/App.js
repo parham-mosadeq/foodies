@@ -4,7 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './components/headers/HomePage';
 import Random from './components/headers/Random';
 import Categories from './components/headers/Categories';
-import Favourite from './components/headers/Favourite';
+import Favourite from './components/favourite/Favourite';
+import FavouritePage from './components/favourite/FavouritePage';
 const App = () => {
   return (
     <main>
@@ -14,6 +15,7 @@ const App = () => {
           <Route path='/random' element={<Random />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/favourite' element={<Favourite />} />
+          <Route path='/favourite/food/:id' element={<FavouritePage />} />
         </Routes>
       </Layout>
     </main>
