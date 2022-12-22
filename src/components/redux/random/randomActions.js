@@ -39,7 +39,7 @@ const addToFave = (id, isFave) => {
   }
   return {
     type: 'RANDOM_FAVE',
-    payload: id,
+    payload: { id, isFave },
   };
 };
 
