@@ -17,12 +17,9 @@ const Favorite = () => {
       <Grid container>
         {fave.length > 0 ? (
           fave.map((item) => {
-            console.log(item);
-
-            const { idMeal, strMeal, strCategory, strTags, strMealThumb } =
-              item;
+            const { idMeal } = item;
             return (
-              <Grid key={idMeal} item sx={12} md={6} lg={4}>
+              <Grid key={idMeal} item xs={12} md={6} lg={4}>
                 <CardEl {...item} />
               </Grid>
             );

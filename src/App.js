@@ -4,8 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './components/headers/HomePage';
 import Random from './components/headers/Random';
 import Categories from './components/headers/Categories';
-// import Favorite from './components/favorite/';
-// import FavoritePage from './components/favorite/FavoritePage';
+
 import FavoritePage from './components/favorite/FavoritePage';
 import Favorite from './components/favorite/Favorite';
 
