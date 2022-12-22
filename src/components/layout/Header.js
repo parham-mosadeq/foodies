@@ -1,162 +1,245 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { CloseSharp, MenuOpen } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-const MainHeader = styled.header`
-  width: 50vw;
-  height: 100vh;
-  overflow-x: hidden;
-  background-color: #4d89ff;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.2s linear;
-  ${(props) =>
-    props.mobileOpen
-      ? ' transform: translateX(0) '
-      : ' transform: translateX(-1000%);'}
-  transform: translateX(-1000%);
-  nav {
-    display: flex;
-    flex-direction: column;
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
 
-    ul:first-child {
-      font-size: 20px;
-      font-weight: bold;
-      letter-spacing: 1.1px;
-      border-bottom: 1px solid silver;
-    }
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '90%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
 
-    ul {
-      padding: 0.4rem 1rem;
-      text-transform: capitalize;
-      li {
-        list-style: none;
-        a {
-          text-decoration: none;
-          color: #fff;
-          width: inherit;
-          cursor: pointer;
-        }
-      }
-    }
-  }
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
 
-  @media (min-width: 700px) {
-    transform: translateX(0);
-    width: 100%;
-    height: fit-content;
-    position: relative;
-    nav {
-      width: 60vw;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-
-      ul:first-child {
-        font-size: 20px;
-        font-weight: bold;
-        letter-spacing: 1.1px;
-        margin-right: 1.5rem;
-        border-bottom: none;
-        display: block;
-        flex-grow: 1;
-      }
-      ul {
-        li {
-          text-transform: capitalize;
-          margin-right: 2rem;
-        }
-      }
-    }
-  }
-`;
-
-const MobileMenu = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  height: max-content;
-  margin: 0 auto;
-  padding: 25px;
-  border: none;
-  background-color: blue;
-  color: #fff;
-  font-size: 20px;
-  position: relative;
-
-  button {
-    display: block;
-    margin: 0;
-    margin-right: 2rem;
-    padding: 0;
-    border: none;
-    z-index: 1000;
-    background-color: transparent;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    color: #fff;
-    transform: translate(50%, -50%);
-  }
-
-  @media (min-width: 700px) {
-    display: none;
-  }
-`;
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handelMenu = () => {
-    setMobileOpen((prevState) => !prevState);
+  // * initializing state to get windows width
+  const [width, setWidth] = useState(window.innerWidth);
+  // * set width on every call
+  const checkSize = () => {
+    setWidth(window.innerWidth);
   };
+  // * using useEffect to call checkSize function
+  useEffect(() => {
+    // * making calls to checkSize function
+    window.addEventListener('resize', checkSize);
+  }, []);
 
-  return (
-    <>
-      <MobileMenu onClick={handelMenu}>
-        <Box component='div'>
-          <Typography>
-            <Link style={{ textDecoration: 'none', color: '#fff' }}>
-              Foodies
-            </Link>
-          </Typography>
+  const menus = ['Random', 'Categories'];
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  // ! Mobile menubar
+
+  if (width < 600) {
+    return (
+      <>
+        <Box
+          sx={{
+            width: '100%',
+            overflowX: 'hidden',
+          }}
+        >
+          <AppBar position='static'>
+            <Toolbar>
+              <IconButton
+                size='large'
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleOpenNavMenu}
+                color='inherit'
+                sx={{
+                  marginRight: 2,
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id='menu-appbar'
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <Typography
+                  variant='h6'
+                  noWrap
+                  component='div'
+                  sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                >
+                  Foodies
+                </Typography>
+                {menus.map((item) => {
+                  return (
+                    <MenuItem key={item} onClick={handleCloseNavMenu}>
+                      <Typography textAlign='center'>
+                        <Link
+                          style={{
+                            textDecoration: 'none',
+                            marginLeft: '10px',
+                            color: 'blue',
+                          }}
+                          to={`/${item.toLowerCase()}`}
+                        >
+                          {item}
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  );
+                })}
+              </Menu>
+
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder='Search…'
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </Search>
+            </Toolbar>
+          </AppBar>
         </Box>
-        <button>{mobileOpen ? <CloseSharp /> : <MenuOpen />}</button>
-      </MobileMenu>
-      <MainHeader mobileOpen={mobileOpen}>
-        <nav>
-          <ul>
-            <li>
-              <Link to='/'>Foodies</Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to='/random'>Random</Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to='/categories'>categories</Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to='/favourite'>favourite</Link>
-            </li>
-          </ul>
-        </nav>
-      </MainHeader>
-    </>
-  );
+      </>
+    );
+  }
+
+  // ! Desktop menubar
+
+  if (width > 601) {
+    return (
+      <Box
+        component='div'
+        sx={{
+          width: '100vw',
+          overflowX: 'hidden',
+        }}
+      >
+        <AppBar position='static'>
+          <Toolbar>
+            <IconButton
+              size='large'
+              edge='start'
+              color='inherit'
+              aria-label='open drawer'
+              sx={{ mr: 2 }}
+            >
+              <Typography
+                variant='h6'
+                noWrap
+                component='div'
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
+                <Link
+                  style={{
+                    textDecoration: 'none',
+                    marginLeft: '10px',
+                    color: '#fff',
+                  }}
+                  to='/'
+                >
+                  Foodies
+                </Link>
+              </Typography>
+            </IconButton>
+
+            <Box flexGrow={1}>
+              <Typography variant='p' component='p'>
+                {menus.map((item) => {
+                  return (
+                    <React.Fragment key={item}>
+                      <Link
+                        to={`/${item.toLowerCase()}`}
+                        style={{
+                          textDecoration: 'none',
+                          marginLeft: '10px',
+                          color: '#fff',
+                        }}
+                      >
+                        {item}
+                      </Link>
+                    </React.Fragment>
+                  );
+                })}
+              </Typography>
+            </Box>
+
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder='Search…'
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
+  }
 };
 
 export default Header;
