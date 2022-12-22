@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import CardEl from '../shared/CardlEl';
 
-const Favourite = () => {
+const Favorite = () => {
   const faves = useSelector((state) =>
     console.log(state.randomState.faveItems)
   );
@@ -35,4 +35,4 @@ const Favourite = () => {
   );
 };
 
-export default Favourite;
+export default Favorite;

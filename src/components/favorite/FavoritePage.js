@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const FavouritePage = () => {
+const FavoritePage = () => {
   const { id } = useParams();
   console.log(id);
   console.log(123);
@@ -11,4 +11,4 @@ const FavouritePage = () => {
   return <div></div>;
 };
 
-export default FavouritePage;
+export default FavoritePage;

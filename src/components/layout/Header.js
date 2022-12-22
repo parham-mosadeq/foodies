@@ -68,7 +68,7 @@ const Header = () => {
     window.addEventListener('resize', checkSize);
   }, []);
 
-  const menus = ['Random', 'Categories'];
+  const menus = ['Random', 'Categories', 'Favorite'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
