@@ -11,6 +11,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { getInputsData } from '../redux/searchbar/searchAction';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,6 +58,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const inputValue = useSelector((state) => state.inputDataState.inputData);
+  console.log(inputValue);
+
   // * initializing state to get windows width
   const [width, setWidth] = useState(window.innerWidth);
   // * set width on every call
@@ -78,9 +84,10 @@ const Header = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   // ! Mobile menubar
 
-  if (width < 600) {
+  if (width < 900) {
     return (
       <>
         <Box
@@ -124,7 +131,6 @@ const Header = () => {
               >
                 <Typography
                   variant='h6'
-                  noWrap
                   component='div'
                   sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                 >
@@ -231,6 +237,8 @@ const Header = () => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                value={inputValue}
+                onChange={(e) => dispatch(getInputsData(e.target.value))}
                 placeholder='Search…'
                 inputProps={{ 'aria-label': 'search' }}
               />
