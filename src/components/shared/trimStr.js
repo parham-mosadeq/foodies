@@ -1,4 +1,4 @@
-const trimStr = (str) => {
+const trimStr = (str = '') => {
   return str.slice(0, 20);
 };
 

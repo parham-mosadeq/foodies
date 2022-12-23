@@ -1,25 +1,21 @@
 import { Container, Grid } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import CardEl from '../shared/CardlEl';
+import CardEl from '../shared/CardEl';
 
 const Favorite = () => {
-  const faves = useSelector((state) =>
-    console.log(state.randomState.faveItems)
-  );
-
-  const data = localStorage.getItem('faves');
-  const fave = JSON.parse(data) ?? faves;
+  const data = localStorage.getItem('fave');
+  const fave = JSON.parse(data);
 
   return (
     <Container maxWidth='lg'>
       <h1>favourite</h1>
-      <Grid container>
-        {fave.length > 0 ? (
+
+      <Grid container mb={5}>
+        {fave ? (
           fave.map((item) => {
             const { idMeal } = item;
             return (
-              <Grid key={idMeal} item xs={12} md={6} lg={4}>
+              <Grid mt={2} mb={2} key={idMeal} item xs={12} md={6} lg={4}>
                 <CardEl {...item} />
               </Grid>
             );

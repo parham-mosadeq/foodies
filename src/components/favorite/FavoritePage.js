@@ -20,7 +20,6 @@ const FavoritePage = () => {
     <Container maxWidth='lg'>
       {meals ? (
         meal.meals.map((item) => {
-          console.log(item);
           return <div key={item.idMeal}>hi</div>;
         })
       ) : (

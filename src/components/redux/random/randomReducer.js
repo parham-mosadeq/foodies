@@ -16,6 +16,7 @@ const randomReducer = (state = initState, action) => {
       return {
         randomRecipe: action.payload,
         isLoading: false,
+        faveItems: [],
         error: '',
       };
     case 'ERROR':
@@ -25,19 +26,17 @@ const randomReducer = (state = initState, action) => {
       };
 
     case 'RANDOM_FAVE':
-      console.log();
-
       const checkFave = () => {
         if (action.payload.isFave) {
           const newArr = state.randomRecipe.meals.filter(
             (item) => item.idMeal !== action.payload.id
           );
+
           return newArr;
         } else {
           const newArr = state.randomRecipe.meals.filter(
             (item) => item.idMeal === action.payload.id
           );
-
           return newArr;
         }
       };
@@ -45,9 +44,10 @@ const randomReducer = (state = initState, action) => {
       return {
         ...state,
         faveItems: checkFave(),
-        saveToLocalStorage: action.payload.isFave
-          ? localStorage.removeItem('fave')
-          : localStorage.setItem('fave', JSON.stringify(checkFave())),
+        saveToLocalStorage: localStorage.setItem(
+          'fave',
+          JSON.stringify(checkFave())
+        ),
       };
 
     default:

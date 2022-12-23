@@ -18,6 +18,8 @@ import { addToFave } from '../redux/random/randomActions';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from '../shared/ScrollToTop';
+import Loader from '../shared/Loader';
 
 const Random = () => {
   // * Using reload to get new meal
@@ -221,7 +223,16 @@ const Random = () => {
               );
             })
           ) : (
-            <h1>loading...</h1>
+            <Box
+              component='div'
+              sx={{
+                height: '1000px',
+                display: 'block',
+                margin: '40px auto',
+              }}
+            >
+              <Loader />
+            </Box>
           )}
         </Grid>
         <Box mt={5} mb={4} component='div'>
@@ -231,6 +242,7 @@ const Random = () => {
         </Box>
         <ToastContainer />
       </Box>
+      <ScrollToTop />
     </Container>
   );
 };
