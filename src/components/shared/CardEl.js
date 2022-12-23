@@ -9,12 +9,13 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { trimStr } from './trimStr';
 
 const CardEl = (props) => {
   const { idMeal, strMeal, strInstructions, strMealThumb } = props;
-
+  const { cat } = useParams();
+  console.log(cat);
   return (
     <>
       <Card
@@ -57,7 +58,9 @@ const CardEl = (props) => {
         <Divider variant='middle' sx={{ margin: '10px' }} />
         <CardActions>
           <Link
-            to={`food/${idMeal}`}
+            to={
+              strInstructions ? `food/${idMeal}` : `/category/${cat}/${strMeal}`
+            }
             style={{ textDecoration: 'none', width: '100%' }}
           >
             <Button

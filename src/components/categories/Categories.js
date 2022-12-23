@@ -1,9 +1,11 @@
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getCategoryRecipe } from '../redux/category/categoryActions';
+import BackBtn from '../shared/BackBtn';
 import CardEl from '../shared/CardEl';
+import Loader from '../shared/Loader';
 const Categories = () => {
   const { cat } = useParams();
 
@@ -18,10 +20,11 @@ const Categories = () => {
 
   return (
     <Container maxWidth='lg'>
+      <BackBtn />
       <Grid container sx={{ margin: '12px auto' }}>
         {categoryItems ? (
           categoryItems.map((item) => {
-            // console.log(item);
+            console.log(item);
 
             return (
               <React.Fragment key={item.idMeal}>
@@ -32,7 +35,9 @@ const Categories = () => {
             );
           })
         ) : (
-          <h4>loader...</h4>
+          <Box component='div'>
+            <Loader />
+          </Box>
         )}
       </Grid>
     </Container>

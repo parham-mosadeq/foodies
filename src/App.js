@@ -7,6 +7,7 @@ import Random from './components/headers/Random';
 import FavoritePage from './components/favorite/FavoritePage';
 import Favorite from './components/favorite/Favorite';
 import Categories from './components/categories/Categories';
+import CategoryItem from './components/categories/CategoryItem';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/food/:id' element={<FavoritePage />} />
           <Route path='/category/:cat' element={<Categories />} />
+          <Route path='/category/:cat/:name' element={<CategoryItem />} />
         </Routes>
       </Layout>
     </main>
