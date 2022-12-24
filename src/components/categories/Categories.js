@@ -6,6 +6,8 @@ import { getCategoryRecipe } from '../redux/category/categoryActions';
 import BackBtn from '../shared/BackBtn';
 import CardEl from '../shared/CardEl';
 import Loader from '../shared/Loader';
+import ScrollToTop from '../shared/ScrollToTop';
+
 const Categories = () => {
   const { cat } = useParams();
 
@@ -24,7 +26,6 @@ const Categories = () => {
       <Grid container sx={{ margin: '12px auto' }}>
         {categoryItems ? (
           categoryItems.map((item) => {
-            console.log(item);
 
             return (
               <React.Fragment key={item.idMeal}>
@@ -35,9 +36,7 @@ const Categories = () => {
             );
           })
         ) : (
-          <Box component='div'>
-            <Loader />
-          </Box>
+          <Loader />
         )}
       </Grid>
     </Container>

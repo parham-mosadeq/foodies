@@ -79,13 +79,6 @@ const Header = () => {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  <Typography
-                    variant='h6'
-                    component='div'
-                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                  >
-                    Foodies
-                  </Typography>
                   {menus.map((item) => {
                     return (
                       <MenuItem key={item} onClick={handleCloseNavMenu}>
@@ -113,7 +106,12 @@ const Header = () => {
                     fontWeight={600}
                     textAlign='center'
                   >
-                    Foodies
+                    <Link
+                      to='/'
+                      style={{ textDecoration: 'none', color: '#fff' }}
+                    >
+                      Foodies
+                    </Link>
                   </Typography>
                 </Box>
               </Box>

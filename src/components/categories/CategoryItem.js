@@ -1,14 +1,13 @@
 import { Box, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCategoryItemsRecipe } from '../redux/categoryItems/categoryItemsActions';
 import Loader from '../shared/Loader';
-import { Divider, Button, Grid, Link, List, Typography } from '@mui/material';
-import { ArrowBack } from '@mui/icons-material';
+import { Divider, Grid, Link, List, Typography } from '@mui/material';
 import BackBtn from '../shared/BackBtn';
+import ScrollToTop from '../shared/ScrollToTop';
 const CategoryItem = () => {
-  const nav = useNavigate();
   const { name } = useParams();
   const dispatch = useDispatch();
 
@@ -274,17 +273,9 @@ const CategoryItem = () => {
           );
         })
       ) : (
-        <Box
-          component='div'
-          sx={{
-            height: '1000px',
-            display: 'block',
-            margin: '40px auto',
-          }}
-        >
-          <Loader />
-        </Box>
+        <Loader />
       )}
+      <ScrollToTop />
     </Container>
   );
 };

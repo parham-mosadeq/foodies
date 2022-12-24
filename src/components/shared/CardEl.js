@@ -15,7 +15,6 @@ import { trimStr } from './trimStr';
 const CardEl = (props) => {
   const { idMeal, strMeal, strInstructions, strMealThumb } = props;
   const { cat } = useParams();
-  console.log(cat);
   return (
     <>
       <Card

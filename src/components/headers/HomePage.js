@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesRecipe } from '../redux/categories/categoriesActions';
 import CatCardEl from '../shared/CatCardEl';
 import Loader from '../shared/Loader';
+import ScrollToTop from '../shared/ScrollToTop';
 
 const Home = () => {
   const cats = useSelector((state) => state.catState.categories);
@@ -37,6 +38,7 @@ const Home = () => {
         )}
         <Grid item></Grid>
       </Grid>
+      <ScrollToTop />
     </Container>
   );
 };
