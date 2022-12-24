@@ -6,7 +6,6 @@ import idReducer from './favorite/favoriteReducer';
 import categoriesReducer from './categories/categoriesReducer';
 import categoryReducer from './category/categoryReducer';
 import categoryItemsReducer from './categoryItems/categoryItemsReducer';
-import searchReducer from './searchbar/searchReducer';
 const store = configureStore({
   reducer: {
     randomState: randomReducer,
@@ -14,7 +13,6 @@ const store = configureStore({
     catState: categoriesReducer,
     catItemsState: categoryReducer,
     catItemNameState: categoryItemsReducer,
-    inputDataState: searchReducer,
   },
   middleware: [thunk],
 });
