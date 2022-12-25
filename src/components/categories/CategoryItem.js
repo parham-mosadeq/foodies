@@ -205,7 +205,7 @@ const CategoryItem = () => {
                       return (
                         <React.Fragment key={idx}>
                           <List component='li'>
-                            {ing !== '' ? (
+                            {ing !== '' && ing !== null ? (
                               <>
                                 <Typography component='p' variant='p'>
                                   {idx + 1} .{ing}
@@ -225,7 +225,7 @@ const CategoryItem = () => {
                       return (
                         <React.Fragment key={idx}>
                           <List component='li'>
-                            {mea !== '' ? (
+                            {mea !== '' && mea !== null ? (
                               <>
                                 <Typography component='p' variant='p'>
                                   {idx + 1} .{mea}
