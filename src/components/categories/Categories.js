@@ -17,6 +17,8 @@ const Categories = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = `Foodies | ${cat}`;
+
     dispatch(getCategoryRecipe(cat));
   }, []);
 
@@ -26,7 +28,6 @@ const Categories = () => {
       <Grid container sx={{ margin: '12px auto' }}>
         {categoryItems ? (
           categoryItems.map((item) => {
-
             return (
               <React.Fragment key={item.idMeal}>
                 <Grid item xs={12} md={6} lg={4}>

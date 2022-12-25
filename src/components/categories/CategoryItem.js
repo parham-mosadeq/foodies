@@ -15,17 +15,12 @@ const CategoryItem = () => {
     (state) => state.catItemNameState.categoryItems.meals
   );
   useEffect(() => {
+    document.title = `Foodies | ${name}`;
+
     dispatch(getCategoryItemsRecipe(name));
   }, []);
   return (
     <Container maxWidth='lg'>
-      {/* <Button
-        variant='contained'
-        onClick={() => nav(-1)}
-        sx={{ color: '#fff', marginTop: '50px' }}
-      >
-        <ArrowBack />
-      </Button> */}
       <BackBtn />
       {catsItem ? (
         catsItem.map((rm) => {

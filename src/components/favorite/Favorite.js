@@ -6,10 +6,10 @@ const Favorite = () => {
   const data = localStorage.getItem('fave');
   const fave = JSON.parse(data);
 
+  document.title = `Foodies | Favorite`;
   return (
     <Container maxWidth='lg'>
-      <h1>favourite</h1>
-
+      <h1>favorite</h1>
       <Grid container mb={5}>
         {fave ? (
           fave.map((item) => {

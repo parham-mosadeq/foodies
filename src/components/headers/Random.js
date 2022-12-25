@@ -34,6 +34,7 @@ const Random = () => {
   useEffect(() => {
     dispatch(getRandomRecipe());
     setIsFave(false);
+    document.title = `Foodies | Random`;
   }, [reload]);
 
   return (

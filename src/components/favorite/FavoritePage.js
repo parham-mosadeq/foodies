@@ -9,6 +9,7 @@ const FavoritePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+
     // * Calling getRecipe and passing id as param
     dispatch(getIdRecipe(id));
   }, []);

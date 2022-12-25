@@ -14,6 +14,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getCategoriesRecipe());
   }, []);
+  document.title = `Foodies | Home`;
 
   return (
     <Container maxWidth='lg'>
