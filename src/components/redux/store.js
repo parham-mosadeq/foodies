@@ -6,6 +6,7 @@ import idReducer from './favorite/favoriteReducer';
 import categoriesReducer from './categories/categoriesReducer';
 import categoryReducer from './category/categoryReducer';
 import categoryItemsReducer from './categoryItems/categoryItemsReducer';
+
 const store = configureStore({
   reducer: {
     randomState: randomReducer,

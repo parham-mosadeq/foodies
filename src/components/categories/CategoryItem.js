@@ -18,6 +18,8 @@ const CategoryItem = () => {
     document.title = `Foodies | ${name}`;
 
     dispatch(getCategoryItemsRecipe(name));
+
+    return () => [];
   }, []);
   return (
     <Container maxWidth='lg'>
